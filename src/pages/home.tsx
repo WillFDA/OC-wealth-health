@@ -1,28 +1,82 @@
+import { useState } from 'react'
+import useStore from '../store/store'
+import type { Employee } from '../utils.ts/types'
+
 export default function Home() {
+  const [formData, setFormData] = useState<Employee>({
+    firstName: '',
+    lastName: '',
+    dateOfBirth: '',
+    startDate: '',
+    street: '',
+    city: '',
+    state: '',
+    zipCode: '',
+    department: '',
+  })
+
+  const addEmployee = useStore(state => state.addEmployee)
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    addEmployee(formData)
+    setFormData({
+      firstName: '',
+      lastName: '',
+      dateOfBirth: '',
+      startDate: '',
+      street: '',
+      city: '',
+      state: '',
+      zipCode: '',
+      department: '',
+    })
+  }
+
   return (
     <form
-      action='#'
+      onSubmit={handleSubmit}
       className='flex flex-col gap-4 bg-white shadow-md p-8 rounded-lg border border-gray-300'
     >
       <div className='grid grid-cols-2 gap-4'>
         <div className='flex flex-col gap-2 col-span-1'>
           <label htmlFor='first-name'>First Name</label>
-          <input className='' type='text' id='first-name' />
+          <input
+            value={formData.firstName}
+            onChange={e => setFormData({ ...formData, firstName: e.target.value })}
+            className=''
+            type='text'
+            id='first-name'
+          />
         </div>
         <div className='flex flex-col gap-2 col-span-1'>
           <label htmlFor='last-name'>Last Name</label>
-          <input type='text' id='last-name' />
+          <input
+            value={formData.lastName}
+            onChange={e => setFormData({ ...formData, lastName: e.target.value })}
+            type='text'
+            id='last-name'
+          />
         </div>
       </div>
-
       <div className='grid grid-cols-2 gap-4'>
         <div className='flex flex-col gap-2 col-span-1'>
           <label htmlFor='date-of-birth'>Date of Birth</label>
-          <input id='date-of-birth' type='text' />
+          <input
+            value={formData.dateOfBirth}
+            onChange={e => setFormData({ ...formData, dateOfBirth: e.target.value })}
+            id='date-of-birth'
+            type='text'
+          />
         </div>
         <div className='flex flex-col gap-2 col-span-1'>
           <label htmlFor='start-date'>Start Date</label>
-          <input id='start-date' type='text' />
+          <input
+            value={formData.startDate}
+            onChange={e => setFormData({ ...formData, startDate: e.target.value })}
+            id='start-date'
+            type='text'
+          />
         </div>
       </div>
 
@@ -31,30 +85,61 @@ export default function Home() {
         <div className='grid grid-cols-2 gap-4'>
           <div className='flex flex-col gap-2 col-span-1'>
             <label htmlFor='street'>Street</label>
-            <input id='street' type='text' />
+            <input
+              value={formData.street}
+              onChange={e => setFormData({ ...formData, street: e.target.value })}
+              id='street'
+              type='text'
+            />
           </div>
 
           <div className='flex flex-col gap-2 col-span-1'>
             <label htmlFor='city'>City</label>
-            <input id='city' type='text' />
+            <input
+              value={formData.city}
+              onChange={e => setFormData({ ...formData, city: e.target.value })}
+              id='city'
+              type='text'
+            />
           </div>
         </div>
 
         <div className='grid grid-cols-2 gap-4 mt-4'>
           <div className='flex flex-col gap-2 col-span-1'>
             <label htmlFor='state'>State</label>
-            <select name='state' id='state'></select>
+            <select
+              value={formData.state}
+              onChange={e => setFormData({ ...formData, state: e.target.value })}
+              name='state'
+              id='state'
+            >
+              <option value='Alabama'>Alabama</option>
+              <option value='Alaska'>Alaska</option>
+              <option value='Arizona'>Arizona</option>
+              <option value='Arkansas'>Arkansas</option>
+              <option value='California'>California</option>
+            </select>
           </div>
 
           <div className='flex flex-col gap-2 col-span-1'>
             <label htmlFor='zip-code'>Zip Code</label>
-            <input id='zip-code' type='number' />
+            <input
+              value={formData.zipCode}
+              onChange={e => setFormData({ ...formData, zipCode: e.target.value })}
+              id='zip-code'
+              type='number'
+            />
           </div>
         </div>
       </fieldset>
 
       <label htmlFor='department'>Department</label>
-      <select name='department' id='department'>
+      <select
+        value={formData.department}
+        onChange={e => setFormData({ ...formData, department: e.target.value })}
+        name='department'
+        id='department'
+      >
         <option>Sales</option>
         <option>Marketing</option>
         <option>Engineering</option>
@@ -62,7 +147,7 @@ export default function Home() {
         <option>Legal</option>
       </select>
 
-      <button type='submit' className='bg-blue-500 text-white p-2 rounded-md'>
+      <button type='submit' className='bg-blue-500 text-white p-2 rounded-md cursor-pointer'>
         Create Employee
       </button>
     </form>
