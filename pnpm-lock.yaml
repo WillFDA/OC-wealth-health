@@ -14,6 +14,9 @@ importers:
       lucide-react:
         specifier: ^0.539.0
         version: 0.539.0(react@19.1.1)
+      oc-modal-willfda:
+        specifier: 0.0.1
+        version: 0.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rollup@4.46.2)(typescript@5.8.3)
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -1119,6 +1122,12 @@ packages:
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
 
+  oc-modal-willfda@0.0.1:
+    resolution: {integrity: sha512-wu0JgWh+qOLFM19KW/ezLseX3a+FW1tc7ygf9ME9KDfKbhpNYsPN9dQt0sLcMvh+FZTCIVtIYNcbcwT8fzx5JQ==}
+    peerDependencies:
+      react: '>=17'
+      react-dom: '>=17'
+
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
     engines: {node: '>= 0.8.0'}
@@ -1204,6 +1213,13 @@ packages:
   reusify@1.1.0:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
+
+  rollup-plugin-dts@6.2.3:
+    resolution: {integrity: sha512-UgnEsfciXSPpASuOelix7m4DrmyQgiaWBnvI0TM4GxuDh5FkqW8E5hu57bCxXB90VvR1WNfLV80yEDN18UogSA==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      rollup: ^3.29.4 || ^4
+      typescript: ^4.5 || ^5.0
 
   rollup@4.46.2:
     resolution: {integrity: sha512-WMmLFI+Boh6xbop+OAGo9cQ3OgX9MIg7xOQjn+pTCwOkk+FNDAeAemXkJ3HzDJrVXleLOFVa1ipuc1AmEx1Dwg==}
@@ -2335,6 +2351,15 @@ snapshots:
 
   node-releases@2.0.19: {}
 
+  oc-modal-willfda@0.0.1(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(rollup@4.46.2)(typescript@5.8.3):
+    dependencies:
+      react: 19.1.1
+      react-dom: 19.1.1(react@19.1.1)
+      rollup-plugin-dts: 6.2.3(rollup@4.46.2)(typescript@5.8.3)
+    transitivePeerDependencies:
+      - rollup
+      - typescript
+
   optionator@0.9.4:
     dependencies:
       deep-is: 0.1.4
@@ -2400,6 +2425,14 @@ snapshots:
   resolve-from@4.0.0: {}
 
   reusify@1.1.0: {}
+
+  rollup-plugin-dts@6.2.3(rollup@4.46.2)(typescript@5.8.3):
+    dependencies:
+      magic-string: 0.30.17
+      rollup: 4.46.2
+      typescript: 5.8.3
+    optionalDependencies:
+      '@babel/code-frame': 7.27.1
 
   rollup@4.46.2:
     dependencies:

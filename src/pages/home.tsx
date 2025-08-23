@@ -1,5 +1,5 @@
+import { Modal } from 'oc-modal-willfda'
 import { useState } from 'react'
-import Modal from '../components/modal'
 import useStore from '../store/store'
 import type { Employee } from '../utils.ts/types'
 
