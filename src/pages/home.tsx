@@ -63,7 +63,7 @@ export default function Home() {
               labelPlacement='outside'
               placeholder='Enter first name'
               isRequired
-              errorMessage='Select a first name'
+              errorMessage='Enter a first name'
               variant='bordered'
               radius='sm'
             />
@@ -76,7 +76,7 @@ export default function Home() {
               label='Last Name'
               labelPlacement='outside'
               placeholder='Enter last name'
-              errorMessage='Select a valid last name'
+              errorMessage='Enter a valid last name'
               isRequired
               variant='bordered'
               radius='sm'
@@ -119,7 +119,7 @@ export default function Home() {
                 label='Street'
                 labelPlacement='outside'
                 placeholder='Enter street address'
-                errorMessage='Select a valid street address'
+                errorMessage='Enter a valid street address'
                 variant='bordered'
                 radius='sm'
               />
@@ -134,7 +134,7 @@ export default function Home() {
                 label='City'
                 labelPlacement='outside'
                 placeholder='Enter city'
-                errorMessage='Select a valid city'
+                errorMessage='Enter a valid city'
                 variant='bordered'
                 radius='sm'
               />
