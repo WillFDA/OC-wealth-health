@@ -21,8 +21,8 @@ export default function EmployeeList() {
     async sort({ items, sortDescriptor }) {
       return {
         items: items.sort((a, b) => {
-          const first = a[sortDescriptor.column]
-          const second = b[sortDescriptor.column]
+          const first = a[sortDescriptor.column as keyof typeof a]
+          const second = b[sortDescriptor.column as keyof typeof b]
 
           if (typeof first === 'string' && typeof second === 'string') {
             return sortDescriptor.direction === 'descending'
