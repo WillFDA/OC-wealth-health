@@ -5,7 +5,7 @@ import type { Employee } from '../utils.ts/types'
 const useStore = create(
   combine(
     {
-      employees: [] as Employee[],
+      employees: JSON.parse(localStorage.getItem('employees') || '[]') as Employee[],
       modalState: false,
     },
     set => ({

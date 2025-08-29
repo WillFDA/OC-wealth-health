@@ -1,8 +1,10 @@
+import { Autocomplete, AutocompleteItem, DatePicker, Input } from '@heroui/react'
+
 import { Modal } from 'oc-modal-willfda'
 import { useState } from 'react'
 import useStore from '../store/store'
 import type { Employee } from '../utils.ts/types'
-
+import { states } from '../utils.ts/us-states'
 export default function Home() {
   const modalState = useStore(state => state.modalState)
   const openModal = useStore(state => state.openModal)
@@ -18,11 +20,11 @@ export default function Home() {
     zipCode: '',
     department: '',
   })
-
   const addEmployee = useStore(state => state.addEmployee)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    openModal()
     addEmployee(formData)
     setFormData({
       firstName: '',
@@ -39,20 +41,13 @@ export default function Home() {
 
   return (
     <>
-      <button
-        className='bg-blue-500 text-white p-2 rounded-md cursor-pointer my-6'
-        onClick={() => openModal()}
-      >
-        Open Modal
-      </button>
       <Modal
         open={modalState}
         onClose={() => {
           closeModal()
-          console.log('Je ferme la modal')
         }}
       >
-        <h1>Hello</h1>
+        <h1>Employee Created!</h1>
       </Modal>
       <form
         onSubmit={handleSubmit}
@@ -60,42 +55,55 @@ export default function Home() {
       >
         <div className='grid grid-cols-2 gap-4'>
           <div className='flex flex-col gap-2 col-span-1'>
-            <label htmlFor='first-name'>First Name</label>
-            <input
+            <Input
               value={formData.firstName}
               onChange={e => setFormData({ ...formData, firstName: e.target.value })}
-              className=''
               type='text'
-              id='first-name'
+              label='First Name'
+              labelPlacement='outside'
+              placeholder='Enter first name'
+              isRequired
+              errorMessage='Select a first name'
+              variant='bordered'
+              radius='sm'
             />
           </div>
           <div className='flex flex-col gap-2 col-span-1'>
-            <label htmlFor='last-name'>Last Name</label>
-            <input
+            <Input
               value={formData.lastName}
               onChange={e => setFormData({ ...formData, lastName: e.target.value })}
               type='text'
-              id='last-name'
+              label='Last Name'
+              labelPlacement='outside'
+              placeholder='Enter last name'
+              errorMessage='Select a valid last name'
+              isRequired
+              variant='bordered'
+              radius='sm'
             />
           </div>
         </div>
         <div className='grid grid-cols-2 gap-4'>
           <div className='flex flex-col gap-2 col-span-1'>
-            <label htmlFor='date-of-birth'>Date of Birth</label>
-            <input
-              value={formData.dateOfBirth}
-              onChange={e => setFormData({ ...formData, dateOfBirth: e.target.value })}
-              id='date-of-birth'
-              type='text'
+            <DatePicker
+              onChange={date => setFormData({ ...formData, dateOfBirth: date?.toString() || '' })}
+              label='Date of Birth'
+              className='max-w-[284px]'
+              isRequired
+              errorMessage='Select a valid date'
+              variant='bordered'
+              radius='sm'
             />
           </div>
           <div className='flex flex-col gap-2 col-span-1'>
-            <label htmlFor='start-date'>Start Date</label>
-            <input
-              value={formData.startDate}
-              onChange={e => setFormData({ ...formData, startDate: e.target.value })}
-              id='start-date'
-              type='text'
+            <DatePicker
+              onChange={date => setFormData({ ...formData, startDate: date?.toString() || '' })}
+              label='Start Date'
+              className='max-w-[284px]'
+              isRequired
+              errorMessage='Select a valid date'
+              variant='bordered'
+              radius='sm'
             />
           </div>
         </div>
@@ -104,68 +112,87 @@ export default function Home() {
           <legend className='text-lg font-bold'>Address</legend>
           <div className='grid grid-cols-2 gap-4'>
             <div className='flex flex-col gap-2 col-span-1'>
-              <label htmlFor='street'>Street</label>
-              <input
+              <Input
                 value={formData.street}
                 onChange={e => setFormData({ ...formData, street: e.target.value })}
-                id='street'
                 type='text'
+                label='Street'
+                labelPlacement='outside'
+                placeholder='Enter street address'
+                errorMessage='Select a valid street address'
+                variant='bordered'
+                radius='sm'
               />
             </div>
 
             <div className='flex flex-col gap-2 col-span-1'>
-              <label htmlFor='city'>City</label>
-              <input
+              <Input
+                isRequired
                 value={formData.city}
                 onChange={e => setFormData({ ...formData, city: e.target.value })}
-                id='city'
                 type='text'
+                label='City'
+                labelPlacement='outside'
+                placeholder='Enter city'
+                errorMessage='Select a valid city'
+                variant='bordered'
+                radius='sm'
               />
             </div>
           </div>
 
           <div className='grid grid-cols-2 gap-4 mt-4'>
             <div className='flex flex-col gap-2 col-span-1'>
-              <label htmlFor='state'>State</label>
-              <select
-                value={formData.state}
-                onChange={e => setFormData({ ...formData, state: e.target.value })}
-                name='state'
-                id='state'
+              <Autocomplete
+                isRequired
+                labelPlacement='outside'
+                className='max-w-xs'
+                label='State'
+                selectedKey={formData.state}
+                onSelectionChange={key => setFormData({ ...formData, state: key as string })}
+                errorMessage='Select a valid state'
+                variant='bordered'
+                radius='sm'
               >
-                <option value='Alabama'>Alabama</option>
-                <option value='Alaska'>Alaska</option>
-                <option value='Arizona'>Arizona</option>
-                <option value='Arkansas'>Arkansas</option>
-                <option value='California'>California</option>
-              </select>
+                {states.map(state => (
+                  <AutocompleteItem key={state.abbreviation}>{state.name}</AutocompleteItem>
+                ))}
+              </Autocomplete>
             </div>
 
             <div className='flex flex-col gap-2 col-span-1'>
-              <label htmlFor='zip-code'>Zip Code</label>
-              <input
+              <Input
+                isRequired
+                errorMessage='Please enter a valid zip code'
+                label='Zip Code'
+                labelPlacement='outside'
+                name='Zip Code'
+                placeholder='Enter your zip code'
+                type='number'
                 value={formData.zipCode}
                 onChange={e => setFormData({ ...formData, zipCode: e.target.value })}
-                id='zip-code'
-                type='number'
+                variant='bordered'
+                radius='sm'
               />
             </div>
           </div>
         </fieldset>
-
-        <label htmlFor='department'>Department</label>
-        <select
-          value={formData.department}
-          onChange={e => setFormData({ ...formData, department: e.target.value })}
-          name='department'
-          id='department'
+        <Autocomplete
+          isRequired
+          labelPlacement='outside'
+          label='State'
+          fullWidth
+          selectedKey={formData.department}
+          onSelectionChange={key => setFormData({ ...formData, department: key as string })}
+          variant='bordered'
+          radius='sm'
         >
-          <option>Sales</option>
-          <option>Marketing</option>
-          <option>Engineering</option>
-          <option>Human Resources</option>
-          <option>Legal</option>
-        </select>
+          <AutocompleteItem key='Sales'>Sales</AutocompleteItem>
+          <AutocompleteItem key='Marketing'>Marketing</AutocompleteItem>
+          <AutocompleteItem key='Engineering'>Engineering</AutocompleteItem>
+          <AutocompleteItem key='Human Resources'>Human Resources</AutocompleteItem>
+          <AutocompleteItem key='Legal'>Legal</AutocompleteItem>
+        </Autocomplete>
 
         <button type='submit' className='bg-blue-500 text-white p-2 rounded-md cursor-pointer'>
           Create Employee

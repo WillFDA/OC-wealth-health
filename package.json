@@ -10,9 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@heroui/autocomplete": "^2.3.26",
+    "@heroui/date-picker": "^2.3.25",
+    "@heroui/react": "^2.8.2",
+    "@heroui/table": "^2.2.24",
+    "@react-stately/data": "^3.14.0",
     "@tailwindcss/vite": "^4.1.11",
+    "framer-motion": "^12.23.12",
     "lucide-react": "^0.539.0",
-    "oc-modal-willfda": "0.0.1",
+    "oc-modal-willfda": "0.0.3",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-router": "^7.8.0",
