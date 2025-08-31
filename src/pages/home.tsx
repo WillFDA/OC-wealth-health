@@ -53,6 +53,7 @@ export default function Home() {
         onSubmit={handleSubmit}
         className='flex flex-col gap-4 bg-white shadow-md p-8 rounded-lg border border-gray-300'
       >
+        <div className='w-2xl max-w-2xl mx-auto my-auto min-h-lg bg-white p-6 rounded-lg hidden'></div>
         <div className='grid grid-cols-2 gap-4'>
           <div className='flex flex-col gap-2 col-span-1'>
             <Input
